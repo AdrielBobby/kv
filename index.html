@@ -4,13 +4,13 @@
   <!-- ╔══════════════════════════════════════════════════════════╗
        ║  SECURITY GATE — must run before anything else renders  ║
        ╚══════════════════════════════════════════════════════════╝ -->
-<!--
+
   <script>
     if (sessionStorage.getItem('kv_access') !== 'true') {
       window.location.replace('https://adrielbobby.github.io');
     }
   </script>
--->
+
 <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
@@ -229,29 +229,12 @@
     /* Red pushpin */
     .pushpin {
       position: absolute;
-      top: -12px;
+      top: -14px;
       left: 50%;
       transform: translateX(-50%);
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #ff6b6b, #c0392b);
-      box-shadow:
-        0 2px 6px rgba(0,0,0,0.4),
-        inset 0 -2px 4px rgba(0,0,0,0.2);
       z-index: 2;
-    }
-    /* Pushpin shaft */
-    .pushpin::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 3px;
-      height: 8px;
-      background: linear-gradient(to bottom, #aaa, #777);
-      border-radius: 0 0 2px 2px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+      line-height: 0;
     }
 
     /* Photo inside card */
@@ -308,6 +291,19 @@
       transform: rotate(var(--rotation, 0deg));
       z-index: 2;
     }
+
+    /* Folded corner effect on sticky notes — pure CSS, no extra HTML */
+    .sticky::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0 14px 14px;
+      border-color: transparent transparent rgba(0,0,0,0.12) transparent;
+    }
     .sticky.yellow {
       background: #fef08a;
       color: #44403c;
@@ -326,14 +322,33 @@
       position: absolute;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 0;
+      background: #111118;
+      border: 1.5px solid #2a2a3a;
+      border-radius: 3px;
+      padding: 6px 4px;
+      box-shadow: 2px 3px 8px rgba(0,0,0,0.5);
     }
     .filmstrip-cell {
-      width: 42px;
-      height: 32px;
-      background: #1a1a2e;
-      border: 1px solid #333;
-      border-radius: 2px;
+      width: 44px;
+      height: 34px;
+      background: #1c1c2e;
+      border-top: 1px solid #2a2a3a;
+      position: relative;
+      /* Sprocket holes on left and right via box-shadow */
+      box-shadow:
+        -8px 0 0 -3px #07080d,
+         8px 0 0 -3px #07080d;
+      margin: 2px 0;
+    }
+
+    /* First and last cells get rounded ends */
+    .filmstrip-cell:first-child {
+      border-top: none;
+      border-radius: 2px 2px 0 0;
+    }
+    .filmstrip-cell:last-child {
+      border-radius: 0 0 2px 2px;
     }
 
   </style>
@@ -427,7 +442,13 @@
              TO ADD CAPTION     : replace "caption here" below the image
              ============================================================ -->
         <div class="photo-card" style="left:120px; top:80px; --rotation:-3deg;">
-          <div class="pushpin"></div>
+          <div class="pushpin">
+            <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="8" r="5.5" fill="#cc2200" stroke="#991100" stroke-width="1"/>
+              <circle cx="10.2" cy="6.2" r="1.8" fill="rgba(255,255,255,0.3)"/>
+              <line x1="12" y1="13" x2="12" y2="22" stroke="#888" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
           <img src="images/photo1.jpeg" alt="" draggable="false" />
           <p class="caption">the goat</p>
         </div>
@@ -438,7 +459,13 @@
              TO ADD CAPTION     : replace "caption here" below the image
              ============================================================ -->
         <div class="photo-card" style="left:520px; top:200px; --rotation:2.5deg;">
-          <div class="pushpin"></div>
+          <div class="pushpin">
+            <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="8" r="5.5" fill="#cc2200" stroke="#991100" stroke-width="1"/>
+              <circle cx="10.2" cy="6.2" r="1.8" fill="rgba(255,255,255,0.3)"/>
+              <line x1="12" y1="13" x2="12" y2="22" stroke="#888" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
           <img src="images/photo2.jpeg" alt="" draggable="false" />
           <p class="caption">Yeah</p>
         </div>
@@ -449,7 +476,13 @@
              TO ADD CAPTION     : replace "caption here" below the image
              ============================================================ -->
         <div class="photo-card" style="left:940px; top:110px; --rotation:-1.5deg;">
-          <div class="pushpin"></div>
+          <div class="pushpin">
+            <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="8" r="5.5" fill="#cc2200" stroke="#991100" stroke-width="1"/>
+              <circle cx="10.2" cy="6.2" r="1.8" fill="rgba(255,255,255,0.3)"/>
+              <line x1="12" y1="13" x2="12" y2="22" stroke="#888" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
           <img src="images/photo3.jpeg" alt="" draggable="false" />
           <p class="caption">look at that fool</p>
         </div>
@@ -474,7 +507,7 @@
         <div class="tape" style="left:1016px; top:102px; transform:rotate(-4deg);"></div>
 
         <!-- ── Film strip decoration ─────────────────────────── -->
-        <div class="filmstrip" style="position:absolute; left:1480px; top:140px; transform:rotate(3deg);">
+        <div class="filmstrip" style="position:absolute; left:1480px; top:120px; transform:rotate(4deg);">
           <div class="filmstrip-cell"></div>
           <div class="filmstrip-cell"></div>
           <div class="filmstrip-cell"></div>
